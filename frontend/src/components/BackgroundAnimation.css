@@ -1,0 +1,21 @@
+html {
+    background-color: #050505; /* The base background layer */
+}
+
+body,
+#root {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: transparent !important;
+}
+
+.network-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Sits behind everything in the body */
+    pointer-events: none;
+}

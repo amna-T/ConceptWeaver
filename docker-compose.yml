@@ -1,0 +1,41 @@
+
+
+services:
+  conceptweaver-api:
+    build: ./backend/auth
+    ports:
+     - "5000:5000"
+    depends_on:
+      - postgres-db
+    environment:
+        - DB_USER=admin
+        - DB_PASSWORD=password
+        - DB_HOST=postgres-db
+        - DB_NAME=conceptweaver
+        - JWT_SECRET=supersecret
+
+  postgres-db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: conceptweaver
+    ports:
+      - "5432:5432"
+
+  neo4j-db:
+    image: neo4j:5.12
+    restart: always
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/password
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+
+volumes:
+  neo4j_data:
+  neo4j_logs:
